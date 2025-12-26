@@ -11,8 +11,10 @@
     ".gitattributes"
   ],
   "words": [
+    "ASPNETCORE",
     "DACPAC",
     "devcontainer",
-    "postCreateCommand"
+    "postCreateCommand",
+    "weatherforecast"
   ]
 }
