@@ -1,0 +1,29 @@
+# Configuración para line endings multiplataforma
+* text=auto eol=lf
+
+# Archivos de código fuente
+*.cs text eol=lf
+*.csproj text eol=lf
+*.sln text eol=lf
+*.config text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+*.sh text eol=lf
+
+# Archivos batch de Windows
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Archivos binarios
+*.dll binary
+*.exe binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
