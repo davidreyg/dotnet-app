@@ -10,6 +10,9 @@
   },
   "omnisharp.enableRoslynAnalyzers": true,
   "omnisharp.enableEditorConfigSupport": true,
-  "csharp.format.enable": true,
-  "dotnet.defaultSolution": "disable"
+  "dotnet.defaultSolution": "disable",
+  "csharp.format.enable": false,
+  "[csharp]": {
+    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+  }
 }
