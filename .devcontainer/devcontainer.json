@@ -53,7 +53,7 @@
   //		}
   // }
   // postCreateCommand.sh parameters: $1=SA password, $2=dacpac path, $3=sql script(s) path
-"postCreateCommand": "dotnet tool restore && bash .devcontainer/mssql/postCreateCommand.sh 'P@ssw0rd' './bin/Debug/' './.devcontainer/mssql/'",
+"postCreateCommand": "git config --local include.path ../.gitconfig && dotnet tool restore && bash .devcontainer/mssql/postCreateCommand.sh 'P@ssw0rd' './bin/Debug/' './.devcontainer/mssql/'",
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": true,
