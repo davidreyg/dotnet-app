@@ -15,6 +15,7 @@
     "DACPAC",
     "devcontainer",
     "Mapster",
+    "nvarchar",
     "postCreateCommand"
   ]
 }
