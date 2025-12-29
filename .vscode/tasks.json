@@ -1,0 +1,72 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dotnet: 🏗 build",
+      "type": "shell",
+      "command": "dotnet build",
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "reveal": "silent"
+      }
+    },
+    {
+      "label": "EF: ➕ Add Migration",
+      "type": "shell",
+      "dependsOn": "dotnet: build",
+      "command": "dotnet ef migrations add ${input:migrationName} --project src/DE.Infrastructure --startup-project src/DE.Api",
+      "problemMatcher": []
+    },
+    {
+      "label": "EF: 🚀 Update Database",
+      "type": "shell",
+      "dependsOn": "dotnet: build",
+      "command": "dotnet ef database update --project src/DE.Infrastructure --startup-project src/DE.Api",
+      "problemMatcher": []
+    },
+    {
+      "label": "EF: ❌ Remove Last Migration",
+      "type": "shell",
+      "command": "dotnet ef migrations remove --project src/DE.Infrastructure --startup-project src/DE.Api",
+      "problemMatcher": []
+    },
+    {
+      "label": "EF: 📜 Generate Script (SQL)",
+      "type": "shell",
+      "dependsOn": "dotnet: build",
+      "command": "dotnet ef migrations script --project src/DE.Infrastructure --startup-project src/DE.Api -o migration_script.sql",
+      "problemMatcher": []
+    },
+    {
+      "label": "APP: 🔥 Run con Watch (Hot Reload)",
+      "type": "shell",
+      "command": "dotnet watch run --project src/DE.Api",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "APP: ▶️ Run Normal",
+      "type": "shell",
+      "command": "dotnet run --project src/DE.Api",
+      "dependsOn": "dotnet: build",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": "$msCompile"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "migrationName",
+      "type": "promptString",
+      "description": "Nombre de la migración",
+      "default": "NewMigration"
+    }
+  ]
+}
