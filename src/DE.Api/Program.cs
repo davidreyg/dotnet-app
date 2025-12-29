@@ -3,6 +3,10 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure Infisical First (antes de todo)
+// This will load secrets and make available in builder.Configuration
+builder.AddInfisicalConfiguration();
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

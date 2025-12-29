@@ -6,11 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Infisical.IConfigurationProvider" Version="0.0.2" />
+    <PackageReference Include="Infisical.Sdk" Version="3.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.11.10" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configuration/" />
   </ItemGroup>
 </Project>
