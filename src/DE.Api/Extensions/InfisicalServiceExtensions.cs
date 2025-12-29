@@ -12,7 +12,7 @@ public static class InfisicalServiceExtensions
         this WebApplicationBuilder builder
     )
     {
-        var options = new InfisicalOptions();
+        var options = new Configuration.InfisicalConfiguration();
         builder.Configuration.GetSection(options.SectionName).Bind(options);
 
         if (

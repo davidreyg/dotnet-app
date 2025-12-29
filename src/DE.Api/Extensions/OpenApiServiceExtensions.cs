@@ -9,28 +9,32 @@ public static class OpenApiServiceExtensions
     /// <summary>
     /// Register OpenAPI service in Dependency Container.
     /// /// </summary>
-    public static IServiceCollection AddOpenApiDocumentation(this IServiceCollection services)
+    public static IServiceCollection AddOpenApiDocumentation(this WebApplicationBuilder builder)
     {
-        services.AddOpenApi(options =>
+        var openApiConfiguration = builder
+            .Configuration.GetSection(OpenApiConfiguration.SectionName)
+            .Get<OpenApiConfiguration>()!;
+
+        builder.Services.AddOpenApi(options =>
         {
             options.AddDocumentTransformer(
                 (document, context, cancellationToken) =>
                 {
                     document.Info = new OpenApiInfo
                     {
-                        Title = OpenApiConfiguration.Title,
-                        Version = OpenApiConfiguration.Version,
-                        Description = OpenApiConfiguration.Description,
+                        Title = openApiConfiguration.Title,
+                        Version = openApiConfiguration.Version,
+                        Description = openApiConfiguration.Description,
                         Contact = new OpenApiContact
                         {
-                            Name = OpenApiConfiguration.Contact.Name,
-                            Email = OpenApiConfiguration.Contact.Email,
-                            Url = new Uri(OpenApiConfiguration.Contact.Url),
+                            Name = openApiConfiguration.Contact.Name,
+                            Email = openApiConfiguration.Contact.Email,
+                            Url = new Uri(openApiConfiguration.Contact.Url),
                         },
                         License = new OpenApiLicense
                         {
-                            Name = OpenApiConfiguration.License.Name,
-                            Url = new Uri(OpenApiConfiguration.License.Url),
+                            Name = openApiConfiguration.License.Name,
+                            Url = new Uri(openApiConfiguration.License.Url),
                         },
                     };
 
@@ -39,7 +43,7 @@ public static class OpenApiServiceExtensions
             );
         });
 
-        return services;
+        return builder.Services;
     }
 
     /// <summary>
@@ -47,6 +51,10 @@ public static class OpenApiServiceExtensions
     /// </summary>
     public static IApplicationBuilder UseOpenApiDocumentation(this WebApplication app)
     {
+        var openApiConfiguration = app
+            .Configuration.GetSection(OpenApiConfiguration.SectionName)
+            .Get<OpenApiConfiguration>()!;
+
         // Enable only in Development y Staging
         if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
         {
@@ -57,15 +65,31 @@ public static class OpenApiServiceExtensions
             app.MapScalarApiReference(options =>
             {
                 options
-                    .WithTitle(OpenApiConfiguration.Title)
-                    .WithTheme(ScalarTheme.BluePlanet)
+                    .WithTitle(openApiConfiguration.Title)
+                    .WithTheme(GetScalarTheme(openApiConfiguration.Scalar.Theme))
                     .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
 
-                options.ShowSidebar = OpenApiConfiguration.Scalar.ShowSidebar;
-                options.DarkMode = OpenApiConfiguration.Scalar.DarkMode;
+                options.ShowSidebar = openApiConfiguration.Scalar.ShowSidebar;
+                options.DarkMode = openApiConfiguration.Scalar.DarkMode;
             });
         }
 
         return app;
+    }
+
+    private static ScalarTheme GetScalarTheme(string theme)
+    {
+        return theme.ToLower() switch
+        {
+            "purple" => ScalarTheme.Purple,
+            "bluePlanet" => ScalarTheme.BluePlanet,
+            "deepSpace" => ScalarTheme.DeepSpace,
+            "saturn" => ScalarTheme.Saturn,
+            "kepler" => ScalarTheme.Kepler,
+            "mars" => ScalarTheme.Mars,
+            "moon" => ScalarTheme.Moon,
+            "default" => ScalarTheme.Default,
+            _ => ScalarTheme.Purple,
+        };
     }
 }
