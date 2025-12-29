@@ -44,7 +44,6 @@ app.UseCors(cors);
 // Configure the HTTP request pipeline
 app.UseOpenApiDocumentation();
 
-//FIXME: Migrations not working
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
