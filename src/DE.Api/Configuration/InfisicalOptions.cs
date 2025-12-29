@@ -38,4 +38,9 @@ public class InfisicalOptions
     /// Can load recursively
     /// </summary>
     public bool Recursive { get; set; } = true;
+
+    /// <summary>
+    /// Should expand references (IMPORTANT!)
+    /// </summary>
+    public bool ExpandSecretReferences { get; set; } = true;
 }
