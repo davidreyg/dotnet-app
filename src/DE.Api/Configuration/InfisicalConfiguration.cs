@@ -1,6 +1,6 @@
 namespace DE.Api.Configuration;
 
-public class InfisicalOptions
+public class InfisicalConfiguration
 {
     public string SectionName = "Infisical";
 
