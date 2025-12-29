@@ -12,10 +12,11 @@ builder.Services.AddControllers();
 // Configure Infisical First (antes de todo)
 // This will load secrets and make available in builder.Configuration
 builder.AddInfisicalConfiguration();
+builder.AddOpenApiDocumentation();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// builder.Services.AddOpenApi();
 
 builder.Services.AddInjectionApplication();
 builder.Services.AddInjectionInfrastructure(builder.Configuration);
@@ -38,7 +39,7 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-app.UseCors(cors);
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline
 app.UseOpenApiDocumentation();
@@ -56,6 +57,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

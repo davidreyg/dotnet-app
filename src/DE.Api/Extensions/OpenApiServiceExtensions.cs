@@ -9,11 +9,14 @@ public static class OpenApiServiceExtensions
     /// <summary>
     /// Register OpenAPI service in Dependency Container.
     /// /// </summary>
-    public static IServiceCollection AddOpenApiDocumentation(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder AddOpenApiDocumentation(this WebApplicationBuilder builder)
     {
         var openApiConfiguration = builder
             .Configuration.GetSection(OpenApiConfiguration.SectionName)
             .Get<OpenApiConfiguration>()!;
+        var oauthConfiguration = builder
+            .Configuration.GetSection(OAuthConfiguration.SectionName)
+            .Get<OAuthConfiguration>()!;
 
         builder.Services.AddOpenApi(options =>
         {
@@ -38,12 +41,58 @@ public static class OpenApiServiceExtensions
                         },
                     };
 
+                    // OAuth Configuration
+                    document.Components ??= new();
+                    document.Components.SecuritySchemes ??=
+                        new Dictionary<string, OpenApiSecurityScheme>();
+                    document.Components.SecuritySchemes.Add(
+                        "oauth2",
+                        new()
+                        {
+                            Type = SecuritySchemeType.OAuth2,
+                            Flows = new()
+                            {
+                                AuthorizationCode = new()
+                                {
+                                    AuthorizationUrl = new Uri(oauthConfiguration.AuthorizationUrl),
+                                    TokenUrl = new Uri(oauthConfiguration.TokenUrl),
+                                    // Scopes = scalarOptions.OAuth.Scopes.ToDictionary(
+                                    //     s => s,
+                                    //     s => $"Access to {s}"
+                                    // ),
+                                    Scopes = new Dictionary<string, string>
+                                    {
+                                        { "api.read", "Read access to API" },
+                                        { "api.write", "Write access to API" },
+                                    },
+                                },
+                            },
+                        }
+                    );
+
+                    document.SecurityRequirements = new List<OpenApiSecurityRequirement>
+                    {
+                        new()
+                        {
+                            {
+                                new OpenApiSecurityScheme
+                                {
+                                    Reference = new()
+                                    {
+                                        Type = ReferenceType.SecurityScheme,
+                                        Id = "oauth2",
+                                    },
+                                },
+                                Array.Empty<string>()
+                            },
+                        },
+                    };
                     return Task.CompletedTask;
                 }
             );
         });
 
-        return builder.Services;
+        return builder;
     }
 
     /// <summary>
@@ -54,6 +103,9 @@ public static class OpenApiServiceExtensions
         var openApiConfiguration = app
             .Configuration.GetSection(OpenApiConfiguration.SectionName)
             .Get<OpenApiConfiguration>()!;
+        var oAuthConfiguration = app
+            .Configuration.GetSection(OAuthConfiguration.SectionName)
+            .Get<OAuthConfiguration>()!;
 
         // Enable only in Development y Staging
         if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
@@ -67,7 +119,16 @@ public static class OpenApiServiceExtensions
                 options
                     .WithTitle(openApiConfiguration.Title)
                     .WithTheme(GetScalarTheme(openApiConfiguration.Scalar.Theme))
-                    .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+                    .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
+                    .AddPreferredSecuritySchemes("OAuth2");
+                options.AddImplicitFlow(
+                    "OAuth2",
+                    flow =>
+                    {
+                        flow.ClientId = oAuthConfiguration.ClientId;
+                        flow.SelectedScopes = ["api.read", "api.write"];
+                    }
+                );
 
                 options.ShowSidebar = openApiConfiguration.Scalar.ShowSidebar;
                 options.DarkMode = openApiConfiguration.Scalar.DarkMode;
