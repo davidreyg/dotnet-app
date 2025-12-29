@@ -44,6 +44,8 @@ public static class InfisicalServiceExtensions
                         .SetEnvironment(options.Environment)
                         .SetSecretPath(options.SecretPath) // Optional, defaults to "/"
                         .SetInfisicalUrl(options.SiteUrl) // Optional, defaults to https://infisical.com
+                        .ShouldExpandSecretReferences(options.ExpandSecretReferences)
+                        .ShouldFetchSecretsRecursively(options.Recursive)
                         .SetAuth(
                             new InfisicalAuthBuilder()
                                 .SetUniversalAuth(options.ClientId, options.ClientSecret)

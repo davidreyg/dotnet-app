@@ -12,7 +12,6 @@ builder.Services.AddControllers();
 // Configure Infisical First (antes de todo)
 // This will load secrets and make available in builder.Configuration
 builder.AddInfisicalConfiguration();
-System.Console.WriteLine(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
