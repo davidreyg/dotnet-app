@@ -14,6 +14,9 @@ builder.Services.AddControllers();
 builder.AddInfisicalConfiguration();
 builder.AddOpenApiDocumentation();
 
+// Add Infrastructure (Authentication)
+builder.Services.AddAuthInfrastructure(builder.Configuration);
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 // builder.Services.AddOpenApi();
