@@ -1,5 +1,6 @@
 using DE.Application.DTOs.Request;
 using DE.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DE.Api.Controllers
@@ -17,6 +18,7 @@ namespace DE.Api.Controllers
             _identityDocumentTypeService = identityDocumentTypeService;
         }
 
+        [Authorize]
         [HttpGet()]
         public async Task<IActionResult> GetSupplier()
         {
