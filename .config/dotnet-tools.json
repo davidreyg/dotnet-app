@@ -15,6 +15,13 @@
         "dotnet-ef"
       ],
       "rollForward": false
+    },
+    "erikej.efcorepowertools.cli": {
+      "version": "9.1.1094",
+      "commands": [
+        "efcpt"
+      ],
+      "rollForward": false
     }
   }
 }
