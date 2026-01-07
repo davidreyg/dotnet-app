@@ -5,6 +5,9 @@
   "dockerComposeFile": "compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces/dotnet",
+  "containerEnv": {
+    "DOTNET_ROLL_FORWARD": "Major"
+  },
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
   // Configure tool-specific properties.
@@ -47,14 +50,18 @@
     }
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [5000, 5001, "db:1433"],
+  "forwardPorts": [
+    5000,
+    5001,
+    "db:1433"
+  ],
   "portsAttributes": {
-  		"5001": {
-  			"protocol": "https"
-  		}
+    "5001": {
+      "protocol": "https"
+    }
   },
   // postCreateCommand.sh parameters: $1=SA password, $2=dacpac path, $3=sql script(s) path
-"postCreateCommand": "git config --local include.path ../.gitconfig && dotnet tool restore && bash .devcontainer/mssql/postCreateCommand.sh 'P@ssw0rd' './bin/Debug/' './.devcontainer/mssql/'",
+  "postCreateCommand": "git config --local include.path ../.gitconfig && dotnet tool restore && bash .devcontainer/mssql/postCreateCommand.sh 'P@ssw0rd' './bin/Debug/' './.devcontainer/mssql/'",
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": true,
