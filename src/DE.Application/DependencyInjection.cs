@@ -15,6 +15,7 @@ public static class DependencyInjection
         services.AddScoped<IValidationService, ValidationService>();
 
         services.AddScoped<IIdentityDocumentTypeService, IdentityDocumentTypeService>();
+        services.AddScoped<IUpsService, UpsService>();
         return services;
     }
 }
