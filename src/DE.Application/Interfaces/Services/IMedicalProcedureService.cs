@@ -2,7 +2,7 @@ using DE.Application.DTOs.Response;
 
 namespace DE.Application.Interfaces.Services;
 
-public interface ICpmsService
+public interface IMedicalProcedureService
 {
     //Write
     // Task<Response<long>> CreateAsync(UpsRequest model);
@@ -11,6 +11,6 @@ public interface ICpmsService
 
     // //Read
     // Task<UpsByIdResponse?> GetByIdAsync(long id);
-    Task<IEnumerable<CpmsResponse>> GetAllAsync();
+    Task<IEnumerable<MedicalProcedureResponse>> GetAllAsync();
     // Task<List<UpsSelectItemResponse>> GetSelectItem();
 }

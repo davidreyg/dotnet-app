@@ -4,6 +4,6 @@ using DE.Infrastructure.Data.Contexts;
 
 namespace DE.Infrastructure.Repositories;
 
-public class CpmsRepository(DbContextApp context)
-    : GenericRepository<Cpms>(context),
-        ICpmsRepository { }
+public class MedicalProcedureRepository(DbContextApp context)
+    : GenericRepository<MedicalProcedure>(context),
+        IMedicalProcedureRepository { }

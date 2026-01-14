@@ -1,6 +1,6 @@
 namespace DE.Domain.Entities;
 
-public class Cpms
+public class MedicalProcedure
 {
     public int Id { get; set; }
     public int Code { get; set; }

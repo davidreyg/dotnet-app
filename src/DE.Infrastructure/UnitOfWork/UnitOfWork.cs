@@ -13,7 +13,7 @@ public class UnitOfWork : IUnitOfWork
 
     public IUpsRepository UpsRepository { get; }
 
-    public ICpmsRepository CpmsRepository { get; }
+    public IMedicalProcedureRepository MedicalProcedureRepository { get; }
 
     //public IGenericRepository<IdentityDocumentType> IdentityDocumentType { get; }
 
@@ -21,13 +21,13 @@ public class UnitOfWork : IUnitOfWork
         DbContextApp context,
         IIdentityDocumentTypeRepository identityDocumentTypeRepository,
         IUpsRepository upsRepository,
-        ICpmsRepository cpmsRepository
+        IMedicalProcedureRepository medicalProcedureRepository
     )
     {
         _context = context;
         IdentityDocumentTypes = identityDocumentTypeRepository;
         UpsRepository = upsRepository;
-        CpmsRepository = cpmsRepository;
+        MedicalProcedureRepository = medicalProcedureRepository;
         //IdentityDocumentType = new GenericRepository<IdentityDocumentType>(context);
     }
 
