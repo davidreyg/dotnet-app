@@ -10,7 +10,7 @@ namespace DE.Infrastructure.Data.Contexts
             : base(options) { }
 
         public DbSet<IdentityDocumentType> IdentityDocumentType { get; set; } = default!;
-        public DbSet<Ups> Ups { get; set; } = default!;
+        public DbSet<HealthServiceUnit> HealthServiceUnit { get; set; } = default!;
         public DbSet<MedicalProcedure> MedicalProcedure { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)

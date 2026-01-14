@@ -8,7 +8,7 @@ namespace DE.Infrastructure.Data.Contexts.Configurations
     {
         public void Configure(EntityTypeBuilder<IdentityDocumentType> builder)
         {
-            builder.ToTable("IdentityDocumentType");
+            builder.ToTable("IdentityDocumentTypes");
             builder.HasKey(t => t.Id);
 
             builder

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DE.Infrastructure.Migrations
 {
     [DbContext(typeof(DbContextApp))]
-    [Migration("20260114170711_Start")]
+    [Migration("20260114173256_Start")]
     partial class Start
     {
         /// <inheritdoc />
@@ -24,6 +24,29 @@ namespace DE.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DE.Domain.Entities.HealthServiceUnit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HealthServiceUnits", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_HealthServiceUnit_Code_Positive", "[Code] > 0");
+                        });
+                });
 
             modelBuilder.Entity("DE.Domain.Entities.IdentityDocumentType", b =>
                 {
@@ -71,30 +94,10 @@ namespace DE.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IdentityDocumentType", (string)null);
+                    b.ToTable("IdentityDocumentTypes", (string)null);
                 });
 
             modelBuilder.Entity("DE.Domain.Entities.MedicalProcedure", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Code")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MedicalProcedure");
-                });
-
-            modelBuilder.Entity("DE.Domain.Entities.Ups", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,9 +114,9 @@ namespace DE.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ups", null, t =>
+                    b.ToTable("MedicalProcedures", null, t =>
                         {
-                            t.HasCheckConstraint("CK_Ups_Code_Positive", "[Code] > 0");
+                            t.HasCheckConstraint("CK_MedicalProcedure_Code_Positive", "[Code] > 0");
                         });
                 });
 #pragma warning restore 612, 618

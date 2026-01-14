@@ -7,15 +7,16 @@ namespace DE.Api.Controllers
 {
     [Route("api/ups")]
     [ApiController]
-    public class UpsController(IUpsService upsService) : ControllerBase
+    public class HealthServiceUnitController(IHealthServiceUnitService healthServiceService)
+        : ControllerBase
     {
-        private readonly IUpsService _upsService = upsService;
+        private readonly IHealthServiceUnitService _healthServiceService = healthServiceService;
 
         [Authorize]
         [HttpGet()]
         public async Task<IActionResult> GetAll()
         {
-            var response = await _upsService.GetAllAsync();
+            var response = await _healthServiceService.GetAllAsync();
             return Ok(response);
         }
     }

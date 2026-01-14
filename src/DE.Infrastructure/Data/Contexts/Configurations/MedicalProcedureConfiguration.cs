@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DE.Infrastructure.Data.Contexts.Configurations;
 
-public class MedicalProcedureConfiguration
+public class MedicalProcedureConfiguration : IEntityTypeConfiguration<MedicalProcedure>
 {
     public void Configure(EntityTypeBuilder<MedicalProcedure> builder)
     {
         builder.ToTable(
-            "MedicalProcedure",
+            "MedicalProcedures",
             t =>
             {
                 t.HasCheckConstraint("CK_MedicalProcedure_Code_Positive", "[Code] > 0");

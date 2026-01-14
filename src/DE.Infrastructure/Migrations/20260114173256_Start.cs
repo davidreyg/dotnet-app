@@ -12,7 +12,22 @@ namespace DE.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "IdentityDocumentType",
+                name: "HealthServiceUnits",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(100)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HealthServiceUnits", x => x.Id);
+                    table.CheckConstraint("CK_HealthServiceUnit_Code_Positive", "[Code] > 0");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IdentityDocumentTypes",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -29,25 +44,11 @@ namespace DE.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityDocumentType", x => x.Id);
+                    table.PrimaryKey("PK_IdentityDocumentTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicalProcedure",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MedicalProcedure", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Ups",
+                name: "MedicalProcedures",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -57,8 +58,8 @@ namespace DE.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ups", x => x.Id);
-                    table.CheckConstraint("CK_Ups_Code_Positive", "[Code] > 0");
+                    table.PrimaryKey("PK_MedicalProcedures", x => x.Id);
+                    table.CheckConstraint("CK_MedicalProcedure_Code_Positive", "[Code] > 0");
                 });
         }
 
@@ -66,13 +67,13 @@ namespace DE.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "IdentityDocumentType");
+                name: "HealthServiceUnits");
 
             migrationBuilder.DropTable(
-                name: "MedicalProcedure");
+                name: "IdentityDocumentTypes");
 
             migrationBuilder.DropTable(
-                name: "Ups");
+                name: "MedicalProcedures");
         }
     }
 }
