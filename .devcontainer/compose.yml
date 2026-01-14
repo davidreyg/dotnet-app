@@ -28,7 +28,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2019-latest
     restart: unless-stopped
     environment:
-      SA_PASSWORD: P@ssw0rd
+      SA_PASSWORD: Sql12345678Desa
       ACCEPT_EULA: Y
     networks:
       - proxy

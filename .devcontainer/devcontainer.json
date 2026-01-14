@@ -15,24 +15,10 @@
     // Configure properties specific to VS Code.
     "vscode": {
       // Set *default* container specific settings.json values on container create.
-      "settings": {
-        "mssql.connections": [
-          {
-            "server": "db,1433",
-            "database": "",
-            "authenticationType": "SqlLogin",
-            "user": "sa",
-            "password": "P@ssw0rd",
-            "emptyPasswordInput": false,
-            "savePassword": false,
-            "profileName": "mssql-container"
-          }
-        ]
-      },
+      "settings": {},
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
         "ms-dotnettools.csharp",
-        "ms-mssql.mssql",
         "EditorConfig.EditorConfig",
         "streetsidesoftware.code-spell-checker",
         "DavidAnson.vscode-markdownlint",
@@ -61,7 +47,7 @@
   //   }
   // },
   // postCreateCommand.sh parameters: $1=SA password, $2=dacpac path, $3=sql script(s) path
-  "postCreateCommand": "git config --local include.path ../.gitconfig && dotnet tool restore && bash .devcontainer/mssql/postCreateCommand.sh 'P@ssw0rd' './bin/Debug/' './.devcontainer/mssql/'",
+  "postCreateCommand": "git config --local include.path ../.gitconfig && dotnet tool restore && bash .devcontainer/mssql/postCreateCommand.sh 'Sql12345678Desa' './bin/Debug/' './.devcontainer/mssql/'",
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": true,
@@ -75,12 +61,7 @@
       "userGid": "automatic"
     },
     "ghcr.io/dhoeric/features/hadolint:1": {},
-    "ghcr.io/shyim/devcontainers-features/bun:0": {},
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "lts",
-      "pnpmVersion": "latest",
-      "nvmVersion": "latest"
-    }
+    "ghcr.io/shyim/devcontainers-features/bun:0": {}
   },
   "mounts": [
     "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
