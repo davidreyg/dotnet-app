@@ -8,6 +8,7 @@ public interface IUnitOfWork : IDisposable
     //Her Added
     IIdentityDocumentTypeRepository IdentityDocumentTypes { get; }
     IUpsRepository UpsRepository { get; }
+    ICpmsRepository CpmsRepository { get; }
 
     Task<int> SaveChangesAsync();
     Task<IDbContextTransaction> BeginTransactionAsync();
