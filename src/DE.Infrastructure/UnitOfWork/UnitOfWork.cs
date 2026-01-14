@@ -15,19 +15,23 @@ public class UnitOfWork : IUnitOfWork
 
     public IMedicalProcedureRepository MedicalProcedureRepository { get; }
 
+    public IProfessionalCouncilRepository ProfessionalCouncilRepository { get; }
+
     //public IGenericRepository<IdentityDocumentType> IdentityDocumentType { get; }
 
     public UnitOfWork(
         DbContextApp context,
         IIdentityDocumentTypeRepository identityDocumentTypeRepository,
         IHealthServiceUnitRepository healthServiceUnitRepository,
-        IMedicalProcedureRepository medicalProcedureRepository
+        IMedicalProcedureRepository medicalProcedureRepository,
+        IProfessionalCouncilRepository professionalCouncilRepository
     )
     {
         _context = context;
         IdentityDocumentTypes = identityDocumentTypeRepository;
         HealthServiceUnitRepository = healthServiceUnitRepository;
         MedicalProcedureRepository = medicalProcedureRepository;
+        ProfessionalCouncilRepository = professionalCouncilRepository;
         //IdentityDocumentType = new GenericRepository<IdentityDocumentType>(context);
     }
 

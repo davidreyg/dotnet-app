@@ -17,6 +17,7 @@ public static class DependencyInjection
         services.AddScoped<IIdentityDocumentTypeService, IdentityDocumentTypeService>();
         services.AddScoped<IHealthServiceUnitService, HealthServiceUnitService>();
         services.AddScoped<IMedicalProcedureService, MedicalProcedureService>();
+        services.AddScoped<IProfessionalCouncilService, ProfessionalCouncilService>();
         return services;
     }
 }
