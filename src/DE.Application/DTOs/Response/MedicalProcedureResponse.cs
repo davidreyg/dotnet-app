@@ -1,6 +1,6 @@
 namespace DE.Application.DTOs.Response;
 
-public class CpmsResponse
+public class MedicalProcedureResponse
 {
     public long Id { get; set; } = default!;
     public int Code { get; set; } = default!;

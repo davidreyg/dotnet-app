@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DE.Infrastructure.Migrations
 {
     [DbContext(typeof(DbContextApp))]
-    [Migration("20260107165429_Ups")]
-    partial class Ups
+    [Migration("20260114170711_Start")]
+    partial class Start
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,6 +74,26 @@ namespace DE.Infrastructure.Migrations
                     b.ToTable("IdentityDocumentType", (string)null);
                 });
 
+            modelBuilder.Entity("DE.Domain.Entities.MedicalProcedure", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicalProcedure");
+                });
+
             modelBuilder.Entity("DE.Domain.Entities.Ups", b =>
                 {
                     b.Property<int>("Id")
@@ -82,13 +102,19 @@ namespace DE.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Descripcion")
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ups", (string)null);
+                    b.ToTable("Ups", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Ups_Code_Positive", "[Code] > 0");
+                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -5,13 +5,13 @@ using Mapster;
 
 namespace DE.Application.Services;
 
-public class CpmsService(IUnitOfWork uow) : ICpmsService
+public class MedicalProcedureService(IUnitOfWork uow) : IMedicalProcedureService
 {
     private readonly IUnitOfWork _uow = uow;
 
-    public async Task<IEnumerable<CpmsResponse>> GetAllAsync()
+    public async Task<IEnumerable<MedicalProcedureResponse>> GetAllAsync()
     {
-        var result = await _uow.CpmsRepository.GetAllAsync();
-        return result.Adapt<IEnumerable<CpmsResponse>>();
+        var result = await _uow.MedicalProcedureRepository.GetAllAsync();
+        return result.Adapt<IEnumerable<MedicalProcedureResponse>>();
     }
 }

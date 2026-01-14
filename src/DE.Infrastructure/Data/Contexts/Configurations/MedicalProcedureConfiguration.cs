@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DE.Infrastructure.Data.Contexts.Configurations;
 
-public class CpmsConfiguration
+public class MedicalProcedureConfiguration
 {
-    public void Configure(EntityTypeBuilder<Cpms> builder)
+    public void Configure(EntityTypeBuilder<MedicalProcedure> builder)
     {
         builder.ToTable(
-            "Cpms",
+            "MedicalProcedure",
             t =>
             {
-                t.HasCheckConstraint("CK_Cpms_Code_Positive", "[Code] > 0");
+                t.HasCheckConstraint("CK_MedicalProcedure_Code_Positive", "[Code] > 0");
             }
         );
         builder.HasKey(t => t.Id);

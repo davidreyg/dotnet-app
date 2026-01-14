@@ -7,15 +7,16 @@ namespace DE.Api.Controllers;
 
 [Route("api/cpms")]
 [ApiController]
-public class CpmsController(ICpmsService cpmsService) : ControllerBase
+public class MedicalProcedureController(IMedicalProcedureService medicalProcedureService)
+    : ControllerBase
 {
-    private readonly ICpmsService _cpmsService = cpmsService;
+    private readonly IMedicalProcedureService _medicalProcedureService = medicalProcedureService;
 
     [Authorize]
     [HttpGet()]
     public async Task<IActionResult> GetAll()
     {
-        var response = await _cpmsService.GetAllAsync();
+        var response = await _medicalProcedureService.GetAllAsync();
         return Ok(response);
     }
 }

@@ -22,26 +22,6 @@ namespace DE.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DE.Domain.Entities.Cpms", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Code")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cpms");
-                });
-
             modelBuilder.Entity("DE.Domain.Entities.IdentityDocumentType", b =>
                 {
                     b.Property<long>("Id")
@@ -89,6 +69,26 @@ namespace DE.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IdentityDocumentType", (string)null);
+                });
+
+            modelBuilder.Entity("DE.Domain.Entities.MedicalProcedure", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicalProcedure");
                 });
 
             modelBuilder.Entity("DE.Domain.Entities.Ups", b =>
