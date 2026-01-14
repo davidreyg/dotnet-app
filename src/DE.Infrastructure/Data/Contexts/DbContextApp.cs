@@ -12,6 +12,7 @@ namespace DE.Infrastructure.Data.Contexts
         public DbSet<IdentityDocumentType> IdentityDocumentType { get; set; } = default!;
         public DbSet<HealthServiceUnit> HealthServiceUnit { get; set; } = default!;
         public DbSet<MedicalProcedure> MedicalProcedure { get; set; } = default!;
+        public DbSet<ProfessionalCouncil> ProfessionalCouncil { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

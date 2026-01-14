@@ -9,6 +9,7 @@ public interface IUnitOfWork : IDisposable
     IIdentityDocumentTypeRepository IdentityDocumentTypes { get; }
     IHealthServiceUnitRepository HealthServiceUnitRepository { get; }
     IMedicalProcedureRepository MedicalProcedureRepository { get; }
+    IProfessionalCouncilRepository ProfessionalCouncilRepository { get; }
 
     Task<int> SaveChangesAsync();
     Task<IDbContextTransaction> BeginTransactionAsync();
