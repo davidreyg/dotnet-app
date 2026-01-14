@@ -36,6 +36,7 @@ public static class DependencyInjection
         // Repositories
         services.AddScoped<IIdentityDocumentTypeRepository, IdentityDocumentTypeRepository>();
         services.AddScoped<IUpsRepository, UpsRepository>();
+        services.AddScoped<ICpmsRepository, CpmsRepository>();
 
         return services;
     }
