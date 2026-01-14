@@ -13,6 +13,7 @@ namespace DE.Infrastructure.Data.Contexts
         public DbSet<HealthServiceUnit> HealthServiceUnit { get; set; } = default!;
         public DbSet<MedicalProcedure> MedicalProcedure { get; set; } = default!;
         public DbSet<ProfessionalCouncil> ProfessionalCouncil { get; set; } = default!;
+        public DbSet<ContractType> ContractType { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
