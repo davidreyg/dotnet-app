@@ -1,6 +1,6 @@
 namespace DE.Domain.Entities;
 
-public class Ups
+public class HealthServiceUnit
 {
     public int Id { get; set; }
     public int Code { get; set; }

@@ -15,7 +15,7 @@ public static class DependencyInjection
         services.AddScoped<IValidationService, ValidationService>();
 
         services.AddScoped<IIdentityDocumentTypeService, IdentityDocumentTypeService>();
-        services.AddScoped<IUpsService, UpsService>();
+        services.AddScoped<IHealthServiceUnitService, HealthServiceUnitService>();
         services.AddScoped<IMedicalProcedureService, MedicalProcedureService>();
         return services;
     }

@@ -1,6 +1,6 @@
-namespace DE.Application.DTOs.Response;
+namespace DE.Application.DTOs.Request;
 
-public class UpsResponse
+public class HealthServiceUnitRequest
 {
     public long Id { get; set; } = default!;
     public int Code { get; set; } = default!;

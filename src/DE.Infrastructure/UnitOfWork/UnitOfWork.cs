@@ -11,7 +11,7 @@ public class UnitOfWork : IUnitOfWork
     private readonly DbContextApp _context;
     public IIdentityDocumentTypeRepository IdentityDocumentTypes { get; }
 
-    public IUpsRepository UpsRepository { get; }
+    public IHealthServiceUnitRepository HealthServiceUnitRepository { get; }
 
     public IMedicalProcedureRepository MedicalProcedureRepository { get; }
 
@@ -20,13 +20,13 @@ public class UnitOfWork : IUnitOfWork
     public UnitOfWork(
         DbContextApp context,
         IIdentityDocumentTypeRepository identityDocumentTypeRepository,
-        IUpsRepository upsRepository,
+        IHealthServiceUnitRepository healthServiceUnitRepository,
         IMedicalProcedureRepository medicalProcedureRepository
     )
     {
         _context = context;
         IdentityDocumentTypes = identityDocumentTypeRepository;
-        UpsRepository = upsRepository;
+        HealthServiceUnitRepository = healthServiceUnitRepository;
         MedicalProcedureRepository = medicalProcedureRepository;
         //IdentityDocumentType = new GenericRepository<IdentityDocumentType>(context);
     }

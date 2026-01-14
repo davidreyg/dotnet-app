@@ -7,7 +7,7 @@ public interface IUnitOfWork : IDisposable
 {
     //Her Added
     IIdentityDocumentTypeRepository IdentityDocumentTypes { get; }
-    IUpsRepository UpsRepository { get; }
+    IHealthServiceUnitRepository HealthServiceUnitRepository { get; }
     IMedicalProcedureRepository MedicalProcedureRepository { get; }
 
     Task<int> SaveChangesAsync();

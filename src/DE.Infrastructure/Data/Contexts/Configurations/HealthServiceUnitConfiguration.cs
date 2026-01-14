@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DE.Infrastructure.Data.Contexts.Configurations
 {
-    public class UpsConfiguration : IEntityTypeConfiguration<Ups>
+    public class HealthServiceUnitConfiguration : IEntityTypeConfiguration<HealthServiceUnit>
     {
-        public void Configure(EntityTypeBuilder<Ups> builder)
+        public void Configure(EntityTypeBuilder<HealthServiceUnit> builder)
         {
             builder.ToTable(
-                "Ups",
+                "HealthServiceUnits",
                 t =>
                 {
-                    t.HasCheckConstraint("CK_Ups_Code_Positive", "[Code] > 0");
+                    t.HasCheckConstraint("CK_HealthServiceUnit_Code_Positive", "[Code] > 0");
                 }
             );
             builder.HasKey(t => t.Id);
