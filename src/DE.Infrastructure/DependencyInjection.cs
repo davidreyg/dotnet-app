@@ -41,6 +41,7 @@ public static class DependencyInjection
         services.AddScoped<IContractTypeRepository, ContractTypeRepository>();
         services.AddScoped<IEstablishmentRepository, EstablishmentRepository>();
         services.AddScoped<IEthnicityRepository, EthnicityRepository>();
+        services.AddScoped<IFinancierRepository, FinancierRepository>();
 
         return services;
     }

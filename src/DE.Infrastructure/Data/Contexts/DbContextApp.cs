@@ -16,6 +16,7 @@ namespace DE.Infrastructure.Data.Contexts
         public DbSet<ContractType> ContractType { get; set; } = default!;
         public DbSet<Establishment> Establishment { get; set; } = default!;
         public DbSet<Ethnicity> Ethnicity { get; set; } = default!;
+        public DbSet<Financier> Financier { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
