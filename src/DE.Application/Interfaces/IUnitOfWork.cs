@@ -12,6 +12,7 @@ public interface IUnitOfWork : IDisposable
     IProfessionalCouncilRepository ProfessionalCouncilRepository { get; }
     IContractTypeRepository ContractTypeRepository { get; }
     IEstablishmentRepository EstablishmentRepository { get; }
+    IEthnicityRepository EthnicityRepository { get; }
 
     Task<int> SaveChangesAsync();
     Task<IDbContextTransaction> BeginTransactionAsync();

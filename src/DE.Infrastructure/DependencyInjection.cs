@@ -40,6 +40,7 @@ public static class DependencyInjection
         services.AddScoped<IProfessionalCouncilRepository, ProfessionalCouncilRepository>();
         services.AddScoped<IContractTypeRepository, ContractTypeRepository>();
         services.AddScoped<IEstablishmentRepository, EstablishmentRepository>();
+        services.AddScoped<IEthnicityRepository, EthnicityRepository>();
 
         return services;
     }
