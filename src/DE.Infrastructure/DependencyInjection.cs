@@ -43,6 +43,7 @@ public static class DependencyInjection
         services.AddScoped<IEthnicityRepository, EthnicityRepository>();
         services.AddScoped<IFinancierRepository, FinancierRepository>();
         services.AddScoped<IExtraConditionRepository, ExtraConditionRepository>();
+        services.AddScoped<ICountryRepository, CountryRepository>();
 
         return services;
     }

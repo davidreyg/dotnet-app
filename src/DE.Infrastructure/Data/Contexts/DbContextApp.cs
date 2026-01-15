@@ -18,6 +18,7 @@ namespace DE.Infrastructure.Data.Contexts
         public DbSet<Ethnicity> Ethnicity { get; set; } = default!;
         public DbSet<Financier> Financier { get; set; } = default!;
         public DbSet<ExtraCondition> ExtraCondition { get; set; } = default!;
+        public DbSet<Country> Country { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
