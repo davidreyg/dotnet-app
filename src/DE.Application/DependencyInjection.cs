@@ -21,6 +21,7 @@ public static class DependencyInjection
         services.AddScoped<IContractTypeService, ContractTypeService>();
         services.AddScoped<IEstablishmentService, EstablishmentService>();
         services.AddScoped<IEthnicityService, EthnicityService>();
+        services.AddScoped<IFinancierService, FinancierService>();
         return services;
     }
 }
