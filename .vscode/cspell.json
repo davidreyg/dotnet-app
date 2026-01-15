@@ -15,8 +15,10 @@
     "Cpms",
     "DACPAC",
     "devcontainer",
+    "Disa",
     "Mapster",
     "nvarchar",
-    "postCreateCommand"
+    "postCreateCommand",
+    "Ubigeo"
   ]
 }
