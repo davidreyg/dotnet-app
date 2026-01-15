@@ -15,6 +15,7 @@ namespace DE.Infrastructure.Data.Contexts
         public DbSet<ProfessionalCouncil> ProfessionalCouncil { get; set; } = default!;
         public DbSet<ContractType> ContractType { get; set; } = default!;
         public DbSet<Establishment> Establishment { get; set; } = default!;
+        public DbSet<Ethnicity> Ethnicity { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
