@@ -12,7 +12,7 @@ public class EstablishmentService(IUnitOfWork uow) : IEstablishmentService
 
     public async Task<IEnumerable<EstablishmentResponse>> GetAllAsync()
     {
-        var result = await _uow.ContractTypeRepository.GetAllAsync();
+        var result = await _uow.EstablishmentRepository.GetAllAsync();
         return result.Adapt<IEnumerable<EstablishmentResponse>>();
     }
 }
