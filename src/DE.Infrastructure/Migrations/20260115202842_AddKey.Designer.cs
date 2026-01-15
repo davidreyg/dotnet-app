@@ -4,6 +4,7 @@ using DE.Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DE.Infrastructure.Migrations
 {
     [DbContext(typeof(DbContextApp))]
-    partial class DbContextAppModelSnapshot : ModelSnapshot
+    [Migration("20260115202842_AddKey")]
+    partial class AddKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -311,37 +314,6 @@ namespace DE.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DE.Domain.Entities.Profession", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Code")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("ProfessionalCouncilCode")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProfessionalCouncilId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfessionalCouncilId");
-
-                    b.ToTable("Professions", null, t =>
-                        {
-                            t.HasCheckConstraint("CK_Profession_Code_Positive", "[Code] > 0");
-                        });
-                });
-
             modelBuilder.Entity("DE.Domain.Entities.ProfessionalCouncil", b =>
                 {
                     b.Property<int>("Id")
@@ -365,17 +337,6 @@ namespace DE.Infrastructure.Migrations
                         {
                             t.HasCheckConstraint("CK_ProfessionalCouncil_Code_Positive", "[Code] > 0");
                         });
-                });
-
-            modelBuilder.Entity("DE.Domain.Entities.Profession", b =>
-                {
-                    b.HasOne("DE.Domain.Entities.ProfessionalCouncil", "ProfessionalCouncil")
-                        .WithMany()
-                        .HasForeignKey("ProfessionalCouncilId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProfessionalCouncil");
                 });
 #pragma warning restore 612, 618
         }
