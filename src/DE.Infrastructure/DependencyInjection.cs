@@ -39,6 +39,7 @@ public static class DependencyInjection
         services.AddScoped<IMedicalProcedureRepository, MedicalProcedureRepository>();
         services.AddScoped<IProfessionalCouncilRepository, ProfessionalCouncilRepository>();
         services.AddScoped<IContractTypeRepository, ContractTypeRepository>();
+        services.AddScoped<IEstablishmentRepository, EstablishmentRepository>();
 
         return services;
     }

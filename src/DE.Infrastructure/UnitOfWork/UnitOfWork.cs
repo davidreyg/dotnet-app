@@ -19,6 +19,8 @@ public class UnitOfWork : IUnitOfWork
 
     public IContractTypeRepository ContractTypeRepository { get; }
 
+    public IEstablishmentRepository EstablishmentRepository { get; }
+
     //public IGenericRepository<IdentityDocumentType> IdentityDocumentType { get; }
 
     public UnitOfWork(
@@ -27,7 +29,8 @@ public class UnitOfWork : IUnitOfWork
         IHealthServiceUnitRepository healthServiceUnitRepository,
         IMedicalProcedureRepository medicalProcedureRepository,
         IProfessionalCouncilRepository professionalCouncilRepository,
-        IContractTypeRepository contractTypeRepository
+        IContractTypeRepository contractTypeRepository,
+        IEstablishmentRepository establishmentRepository
     )
     {
         _context = context;
@@ -36,6 +39,7 @@ public class UnitOfWork : IUnitOfWork
         MedicalProcedureRepository = medicalProcedureRepository;
         ProfessionalCouncilRepository = professionalCouncilRepository;
         ContractTypeRepository = contractTypeRepository;
+        EstablishmentRepository = establishmentRepository;
         //IdentityDocumentType = new GenericRepository<IdentityDocumentType>(context);
     }
 
