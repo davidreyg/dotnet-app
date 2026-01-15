@@ -31,6 +31,8 @@ public class UnitOfWork : IUnitOfWork
 
     public IProfessionRepository ProfessionRepository { get; }
 
+    public IEmployeeRepository EmployeeRepository { get; }
+
     //public IGenericRepository<IdentityDocumentType> IdentityDocumentType { get; }
 
     public UnitOfWork(
@@ -45,7 +47,8 @@ public class UnitOfWork : IUnitOfWork
         IFinancierRepository financierRepository,
         IExtraConditionRepository extraConditionRepository,
         ICountryRepository countryRepository,
-        IProfessionRepository professionRepository
+        IProfessionRepository professionRepository,
+        IEmployeeRepository employeeRepository
     )
     {
         _context = context;
@@ -60,6 +63,7 @@ public class UnitOfWork : IUnitOfWork
         ExtraConditionRepository = extraConditionRepository;
         CountryRepository = countryRepository;
         ProfessionRepository = professionRepository;
+        EmployeeRepository = employeeRepository;
         //IdentityDocumentType = new GenericRepository<IdentityDocumentType>(context);
     }
 
