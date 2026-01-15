@@ -8,5 +8,4 @@ public class Profession
 
     // Foreign Key
     public int ProfessionalCouncilCode { get; set; }
-    public ProfessionalCouncil ProfessionalCouncil { get; set; } = null!;
 }
