@@ -24,6 +24,7 @@ public static class DependencyInjection
         services.AddScoped<IFinancierService, FinancierService>();
         services.AddScoped<IExtraConditionService, ExtraConditionService>();
         services.AddScoped<ICountryService, CountryService>();
+        services.AddScoped<IProfessionService, ProfessionService>();
         return services;
     }
 }

@@ -16,6 +16,7 @@ public interface IUnitOfWork : IDisposable
     IFinancierRepository FinancierRepository { get; }
     IExtraConditionRepository ExtraConditionRepository { get; }
     ICountryRepository CountryRepository { get; }
+    IProfessionRepository ProfessionRepository { get; }
 
     Task<int> SaveChangesAsync();
     Task<IDbContextTransaction> BeginTransactionAsync();
