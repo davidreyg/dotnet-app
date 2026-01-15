@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DE.Infrastructure.Migrations
 {
     [DbContext(typeof(DbContextApp))]
-    [Migration("20260115195514_ExtraCondition")]
-    partial class ExtraCondition
+    [Migration("20260115204352_Inicio")]
+    partial class Inicio
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,28 @@ namespace DE.Infrastructure.Migrations
                         {
                             t.HasCheckConstraint("CK_ContractType_Code_Positive", "[Code] > 0");
                         });
+                });
+
+            modelBuilder.Entity("DE.Domain.Entities.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries", (string)null);
                 });
 
             modelBuilder.Entity("DE.Domain.Entities.Establishment", b =>
@@ -292,6 +314,32 @@ namespace DE.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("DE.Domain.Entities.Profession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("ProfessionalCouncilCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Professions", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Profession_Code_Positive", "[Code] > 0");
+                        });
+                });
+
             modelBuilder.Entity("DE.Domain.Entities.ProfessionalCouncil", b =>
                 {
                     b.Property<int>("Id")
@@ -308,6 +356,8 @@ namespace DE.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Code");
 
                     b.ToTable("ProfessionalCouncils", null, t =>
                         {

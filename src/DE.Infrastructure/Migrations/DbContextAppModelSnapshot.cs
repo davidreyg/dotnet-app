@@ -311,6 +311,32 @@ namespace DE.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("DE.Domain.Entities.Profession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("ProfessionalCouncilCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Professions", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Profession_Code_Positive", "[Code] > 0");
+                        });
+                });
+
             modelBuilder.Entity("DE.Domain.Entities.ProfessionalCouncil", b =>
                 {
                     b.Property<int>("Id")
@@ -327,6 +353,8 @@ namespace DE.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Code");
 
                     b.ToTable("ProfessionalCouncils", null, t =>
                         {
