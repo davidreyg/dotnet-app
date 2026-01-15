@@ -15,6 +15,7 @@ public interface IUnitOfWork : IDisposable
     IEthnicityRepository EthnicityRepository { get; }
     IFinancierRepository FinancierRepository { get; }
     IExtraConditionRepository ExtraConditionRepository { get; }
+    ICountryRepository CountryRepository { get; }
 
     Task<int> SaveChangesAsync();
     Task<IDbContextTransaction> BeginTransactionAsync();

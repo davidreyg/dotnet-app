@@ -23,6 +23,7 @@ public static class DependencyInjection
         services.AddScoped<IEthnicityService, EthnicityService>();
         services.AddScoped<IFinancierService, FinancierService>();
         services.AddScoped<IExtraConditionService, ExtraConditionService>();
+        services.AddScoped<ICountryService, CountryService>();
         return services;
     }
 }
