@@ -13,12 +13,12 @@ public class ProfessionalCouncilConfiguration : IEntityTypeConfiguration<Profess
             "ProfessionalCouncils",
             t =>
             {
-                t.HasCheckConstraint("CK_ProfessionalCouncil_Code_Positive", "[Code] > 0");
+                t.HasCheckConstraint("CK_ProfessionalCouncil_Code_Positive", "[Code] > -1");
             }
         );
         builder.HasKey(t => t.Id);
         builder.HasAlternateKey(t => t.Code);
         builder.Property(b => b.Code).IsRequired();
-        builder.Property(b => b.Description).IsRequired().HasColumnType("nvarchar(100)");
+        builder.Property(b => b.Description).IsRequired();
     }
 }

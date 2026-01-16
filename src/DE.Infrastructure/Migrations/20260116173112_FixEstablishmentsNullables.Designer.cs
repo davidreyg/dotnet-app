@@ -4,6 +4,7 @@ using DE.Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DE.Infrastructure.Migrations
 {
     [DbContext(typeof(DbContextApp))]
-    partial class DbContextAppModelSnapshot : ModelSnapshot
+    [Migration("20260116173112_FixEstablishmentsNullables")]
+    partial class FixEstablishmentsNullables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,33 +68,6 @@ namespace DE.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries", (string)null);
-                });
-
-            modelBuilder.Entity("DE.Domain.Entities.DocumentType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Abbreviation")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("Code")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DocumentTypes", (string)null);
                 });
 
             modelBuilder.Entity("DE.Domain.Entities.Employee", b =>
@@ -384,17 +360,19 @@ namespace DE.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("Code")
-                        .HasColumnType("float");
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("MedicalProcedures", (string)null);
+                    b.ToTable("MedicalProcedures", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_MedicalProcedure_Code_Positive", "[Code] > 0");
+                        });
                 });
 
             modelBuilder.Entity("DE.Domain.Entities.Profession", b =>
@@ -436,7 +414,7 @@ namespace DE.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -444,7 +422,7 @@ namespace DE.Infrastructure.Migrations
 
                     b.ToTable("ProfessionalCouncils", null, t =>
                         {
-                            t.HasCheckConstraint("CK_ProfessionalCouncil_Code_Positive", "[Code] > -1");
+                            t.HasCheckConstraint("CK_ProfessionalCouncil_Code_Positive", "[Code] > 0");
                         });
                 });
 

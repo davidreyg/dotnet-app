@@ -20,8 +20,10 @@ namespace DE.Infrastructure.Data.Contexts
         public DbSet<ExtraCondition> ExtraCondition { get; set; } = default!;
         public DbSet<Country> Country { get; set; } = default!;
         public DbSet<Profession> Profession { get; set; } = default!;
+        public DbSet<SisProcedure> SisProcedure { get; set; } = default!;
         public DbSet<Employee> Employee { get; set; } = default!;
         public DbSet<Tariff> Tariff { get; set; } = default!;
+        public DbSet<DocumentType> DocumentType { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

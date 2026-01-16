@@ -5,11 +5,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="33.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.10" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../DE.Application/DE.Application.csproj" />
     <ProjectReference Include="../DE.Domain/DE.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Data\Seeds\*.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
