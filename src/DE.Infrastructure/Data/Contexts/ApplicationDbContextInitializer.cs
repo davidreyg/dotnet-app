@@ -117,6 +117,10 @@ namespace DE.Infrastructure.Data.Contexts
                 "Professions.csv",
                 _context.Profession
             );
+            await SeedEntityFromCsv<SisProcedure, SisProcedureMap>(
+                "SisProcedures.csv",
+                _context.SisProcedure
+            );
             await _context.SaveChangesAsync();
             if (!_context.IdentityDocumentType.Any())
             {
