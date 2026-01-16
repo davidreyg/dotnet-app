@@ -113,6 +113,10 @@ namespace DE.Infrastructure.Data.Contexts
                 "ProfessionalCouncils.csv",
                 _context.ProfessionalCouncil
             );
+            await SeedEntityFromCsv<Profession, ProfessionMap>(
+                "Professions.csv",
+                _context.Profession
+            );
             await _context.SaveChangesAsync();
             if (!_context.IdentityDocumentType.Any())
             {
