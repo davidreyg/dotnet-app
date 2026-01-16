@@ -1,4 +1,8 @@
+using System.Globalization;
+using CsvHelper;
+using CsvHelper.Configuration;
 using DE.Domain.Entities;
+using DE.Infrastructure.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -47,8 +51,39 @@ namespace DE.Infrastructure.Data.Contexts
             }
         }
 
+        private static async Task SeedEntityFromCsv<TEntity, TMap>(
+            string fileName,
+            DbSet<TEntity> dbSet
+        )
+            where TEntity : class
+            where TMap : ClassMap<TEntity>
+        {
+            if (!await dbSet.AnyAsync())
+            {
+                var path = Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "Data",
+                    "Seeds",
+                    fileName
+                );
+
+                if (!File.Exists(path))
+                    return;
+
+                using var reader = new StreamReader(path);
+                using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+                csv.Context.RegisterClassMap<TMap>();
+
+                var records = csv.GetRecords<TEntity>().ToList();
+                await dbSet.AddRangeAsync(records);
+            }
+        }
+
         public async Task TrySeedAsync()
         {
+            await SeedEntityFromCsv<Country, CountryMap>("Countries.csv", _context.Country);
+            await _context.SaveChangesAsync();
             if (!_context.IdentityDocumentType.Any())
             {
                 _context.IdentityDocumentType.AddRange(

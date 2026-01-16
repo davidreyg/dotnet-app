@@ -9,7 +9,8 @@
     ".editorconfig",
     ".gitignore",
     ".gitattributes",
-    ".gitconfig"
+    ".gitconfig",
+    "src/DE.Infrastructure/Data/Mappings/*.cs"
   ],
   "words": [
     "Cpms",
