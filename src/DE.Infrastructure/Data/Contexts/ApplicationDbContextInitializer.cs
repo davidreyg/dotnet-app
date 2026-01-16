@@ -101,6 +101,10 @@ namespace DE.Infrastructure.Data.Contexts
                 "HealthServiceUnits.csv",
                 _context.HealthServiceUnit
             );
+            await SeedEntityFromCsv<DocumentType, DocumentTypeMap>(
+                "DocumentTypes.csv",
+                _context.DocumentType
+            );
             await _context.SaveChangesAsync();
             if (!_context.IdentityDocumentType.Any())
             {
