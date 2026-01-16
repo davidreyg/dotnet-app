@@ -91,6 +91,7 @@ namespace DE.Infrastructure.Data.Contexts
                 "Establishments.csv",
                 _context.Establishment
             );
+            await SeedEntityFromCsv<Ethnicity, EthnicityMap>("Ethnicities.csv", _context.Ethnicity);
             await _context.SaveChangesAsync();
             if (!_context.IdentityDocumentType.Any())
             {
