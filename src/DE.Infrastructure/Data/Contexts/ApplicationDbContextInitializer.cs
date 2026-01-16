@@ -83,6 +83,14 @@ namespace DE.Infrastructure.Data.Contexts
         public async Task TrySeedAsync()
         {
             await SeedEntityFromCsv<Country, CountryMap>("Countries.csv", _context.Country);
+            await SeedEntityFromCsv<ContractType, ContractTypeMap>(
+                "ContractTypes.csv",
+                _context.ContractType
+            );
+            await SeedEntityFromCsv<Establishment, EstablishmentMap>(
+                "Establishments.csv",
+                _context.Establishment
+            );
             await _context.SaveChangesAsync();
             if (!_context.IdentityDocumentType.Any())
             {

@@ -4,6 +4,7 @@ using DE.Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DE.Infrastructure.Migrations
 {
     [DbContext(typeof(DbContextApp))]
-    partial class DbContextAppModelSnapshot : ModelSnapshot
+    [Migration("20260116172228_FixEstablishments")]
+    partial class FixEstablishments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,7 +144,7 @@ namespace DE.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("DisaCode")
+                    b.Property<int>("DisaCode")
                         .HasColumnType("int");
 
                     b.Property<string>("DisaName")
@@ -154,7 +157,7 @@ namespace DE.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("MicroRedCode")
+                    b.Property<int>("MicroRedCode")
                         .HasColumnType("int");
 
                     b.Property<string>("MicroRedName")
@@ -172,7 +175,7 @@ namespace DE.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("RedCode")
+                    b.Property<int>("RedCode")
                         .HasColumnType("int");
 
                     b.Property<string>("RedName")
