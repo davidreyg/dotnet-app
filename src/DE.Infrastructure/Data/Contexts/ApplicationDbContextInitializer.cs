@@ -121,6 +121,7 @@ namespace DE.Infrastructure.Data.Contexts
                 "SisProcedures.csv",
                 _context.SisProcedure
             );
+            await SeedEntityFromCsv<Tariff, TariffMap>("Tariffs.csv", _context.Tariff);
             await _context.SaveChangesAsync();
             if (!_context.IdentityDocumentType.Any())
             {
