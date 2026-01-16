@@ -35,6 +35,8 @@ public class UnitOfWork : IUnitOfWork
 
     public ISisProcedureRepository SisProcedureRepository { get; }
 
+    public ITariffRepository TariffRepository { get; }
+
     //public IGenericRepository<IdentityDocumentType> IdentityDocumentType { get; }
 
     public UnitOfWork(
@@ -51,7 +53,8 @@ public class UnitOfWork : IUnitOfWork
         ICountryRepository countryRepository,
         IProfessionRepository professionRepository,
         IEmployeeRepository employeeRepository,
-        ISisProcedureRepository sisProcedureRepository
+        ISisProcedureRepository sisProcedureRepository,
+        ITariffRepository tariffRepository
     )
     {
         _context = context;
@@ -68,6 +71,7 @@ public class UnitOfWork : IUnitOfWork
         ProfessionRepository = professionRepository;
         EmployeeRepository = employeeRepository;
         SisProcedureRepository = sisProcedureRepository;
+        TariffRepository = tariffRepository;
         //IdentityDocumentType = new GenericRepository<IdentityDocumentType>(context);
     }
 

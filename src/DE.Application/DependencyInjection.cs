@@ -27,6 +27,7 @@ public static class DependencyInjection
         services.AddScoped<IProfessionService, ProfessionService>();
         services.AddScoped<IEmployeeService, EmployeeService>();
         services.AddScoped<ISisProcedureService, SisProcedureService>();
+        services.AddScoped<ITariffService, TariffService>();
         return services;
     }
 }

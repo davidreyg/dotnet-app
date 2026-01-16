@@ -19,6 +19,7 @@ public interface IUnitOfWork : IDisposable
     IProfessionRepository ProfessionRepository { get; }
     IEmployeeRepository EmployeeRepository { get; }
     ISisProcedureRepository SisProcedureRepository { get; }
+    ITariffRepository TariffRepository { get; }
 
     Task<int> SaveChangesAsync();
     Task<IDbContextTransaction> BeginTransactionAsync();
