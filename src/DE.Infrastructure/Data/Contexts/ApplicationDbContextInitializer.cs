@@ -96,6 +96,7 @@ namespace DE.Infrastructure.Data.Contexts
                 "ExtraConditions.csv",
                 _context.ExtraCondition
             );
+            await SeedEntityFromCsv<Financier, FinancierMap>("Financiers.csv", _context.Financier);
             await _context.SaveChangesAsync();
             if (!_context.IdentityDocumentType.Any())
             {
