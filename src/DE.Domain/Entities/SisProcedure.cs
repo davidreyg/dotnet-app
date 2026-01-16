@@ -1,6 +1,6 @@
 namespace DE.Domain.Entities;
 
-public class Procedure
+public class SisProcedure
 {
     public int Id { get; set; }
     public string Code { get; set; } = default!;
