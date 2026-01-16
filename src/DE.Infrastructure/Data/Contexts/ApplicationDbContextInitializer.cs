@@ -101,6 +101,10 @@ namespace DE.Infrastructure.Data.Contexts
                 "HealthServiceUnits.csv",
                 _context.HealthServiceUnit
             );
+            await SeedEntityFromCsv<MedicalProcedure, MedicalProcedureMap>(
+                "MedicalProcedures.csv",
+                _context.MedicalProcedure
+            );
             await SeedEntityFromCsv<DocumentType, DocumentTypeMap>(
                 "DocumentTypes.csv",
                 _context.DocumentType
