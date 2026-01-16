@@ -8,16 +8,10 @@ public class MedicalProcedureConfiguration : IEntityTypeConfiguration<MedicalPro
 {
     public void Configure(EntityTypeBuilder<MedicalProcedure> builder)
     {
-        builder.ToTable(
-            "MedicalProcedures",
-            t =>
-            {
-                t.HasCheckConstraint("CK_MedicalProcedure_Code_Positive", "[Code] > 0");
-            }
-        );
+        builder.ToTable("MedicalProcedures");
         builder.HasKey(t => t.Id);
 
         builder.Property(b => b.Code).IsRequired();
-        builder.Property(b => b.Description).IsRequired().HasColumnType("nvarchar(100)");
+        builder.Property(b => b.Description).IsRequired().HasMaxLength(255);
     }
 }
