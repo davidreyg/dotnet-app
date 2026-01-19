@@ -33,7 +33,7 @@ public class HisAttention
     public decimal? PrePregnancyWeight { get; set; }
 
     // Atención y Procedimientos
-    public int ShiftId { get; set; } //TurnoId
+    public string ShiftId { get; set; } = default!;
     public string ItemCode { get; set; } = default!; // CPT / CIE-10
     public string DiagnosisType { get; set; } = default!; // P, D, R
     public string LabValue { get; set; } = default!;

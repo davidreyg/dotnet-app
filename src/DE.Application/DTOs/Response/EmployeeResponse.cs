@@ -3,6 +3,7 @@ namespace DE.Application.DTOs.Response;
 public class EmployeeResponse
 {
     public int Id { get; set; } = default!;
+    public long Code { get; set; } = default!;
     public int DocumentTypeCode { get; set; } = default!;
     public string DocumentNumber { get; set; } = default!;
     public string LastName { get; set; } = default!;
