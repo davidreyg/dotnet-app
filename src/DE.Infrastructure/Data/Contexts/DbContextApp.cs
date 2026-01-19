@@ -24,6 +24,7 @@ namespace DE.Infrastructure.Data.Contexts
         public DbSet<Employee> Employee { get; set; } = default!;
         public DbSet<Tariff> Tariff { get; set; } = default!;
         public DbSet<DocumentType> DocumentType { get; set; } = default!;
+        public DbSet<HisAttention> HisAttention { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
