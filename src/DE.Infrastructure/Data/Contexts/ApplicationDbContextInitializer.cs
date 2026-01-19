@@ -53,7 +53,9 @@ namespace DE.Infrastructure.Data.Contexts
 
         private static async Task SeedEntityFromCsv<TEntity, TMap>(
             string fileName,
-            DbSet<TEntity> dbSet
+            DbSet<TEntity> dbSet,
+            DbContext context,
+            int chunkSize = 10000
         )
             where TEntity : class
             where TMap : ClassMap<TEntity>
@@ -75,91 +77,101 @@ namespace DE.Infrastructure.Data.Contexts
 
                 csv.Context.RegisterClassMap<TMap>();
 
-                var records = csv.GetRecords<TEntity>().ToList();
-                await dbSet.AddRangeAsync(records);
+                var records = csv.GetRecords<TEntity>();
+                var chunk = new List<TEntity>(chunkSize);
+                var totalProcessed = 0;
+
+                foreach (var record in records)
+                {
+                    chunk.Add(record);
+
+                    if (chunk.Count >= chunkSize)
+                    {
+                        await dbSet.AddRangeAsync(chunk);
+                        await context.SaveChangesAsync();
+
+                        totalProcessed += chunk.Count;
+                        Console.WriteLine($"Total processed: {totalProcessed} from {fileName}...");
+
+                        chunk.Clear();
+                        context.ChangeTracker.Clear();
+                    }
+                }
+
+                if (chunk.Count > 0)
+                {
+                    await dbSet.AddRangeAsync(chunk);
+                    await context.SaveChangesAsync();
+
+                    totalProcessed += chunk.Count;
+                    Console.WriteLine($"Total: {totalProcessed} from {fileName}");
+                }
             }
         }
 
         public async Task TrySeedAsync()
         {
-            await SeedEntityFromCsv<Country, CountryMap>("Countries.csv", _context.Country);
+            await SeedEntityFromCsv<Country, CountryMap>(
+                "Countries.csv",
+                _context.Country,
+                _context
+            );
             await SeedEntityFromCsv<ContractType, ContractTypeMap>(
                 "ContractTypes.csv",
-                _context.ContractType
+                _context.ContractType,
+                _context
             );
             await SeedEntityFromCsv<Establishment, EstablishmentMap>(
                 "Establishments.csv",
-                _context.Establishment
+                _context.Establishment,
+                _context
             );
-            await SeedEntityFromCsv<Ethnicity, EthnicityMap>("Ethnicities.csv", _context.Ethnicity);
+            await SeedEntityFromCsv<Ethnicity, EthnicityMap>(
+                "Ethnicities.csv",
+                _context.Ethnicity,
+                _context
+            );
             await SeedEntityFromCsv<ExtraCondition, ExtraConditionMap>(
                 "ExtraConditions.csv",
-                _context.ExtraCondition
+                _context.ExtraCondition,
+                _context
             );
-            await SeedEntityFromCsv<Financier, FinancierMap>("Financiers.csv", _context.Financier);
+            await SeedEntityFromCsv<Financier, FinancierMap>(
+                "Financiers.csv",
+                _context.Financier,
+                _context
+            );
             await SeedEntityFromCsv<HealthServiceUnit, HealthServiceUnitMap>(
                 "HealthServiceUnits.csv",
-                _context.HealthServiceUnit
+                _context.HealthServiceUnit,
+                _context
             );
             await SeedEntityFromCsv<MedicalProcedure, MedicalProcedureMap>(
                 "MedicalProcedures.csv",
-                _context.MedicalProcedure
+                _context.MedicalProcedure,
+                _context
             );
             await SeedEntityFromCsv<DocumentType, DocumentTypeMap>(
                 "DocumentTypes.csv",
-                _context.DocumentType
+                _context.DocumentType,
+                _context
             );
             await SeedEntityFromCsv<ProfessionalCouncil, ProfessionalCouncilMap>(
                 "ProfessionalCouncils.csv",
-                _context.ProfessionalCouncil
+                _context.ProfessionalCouncil,
+                _context
             );
             await SeedEntityFromCsv<Profession, ProfessionMap>(
                 "Professions.csv",
-                _context.Profession
+                _context.Profession,
+                _context
             );
             await SeedEntityFromCsv<SisProcedure, SisProcedureMap>(
                 "SisProcedures.csv",
-                _context.SisProcedure
+                _context.SisProcedure,
+                _context
             );
-            await SeedEntityFromCsv<Tariff, TariffMap>("Tariffs.csv", _context.Tariff);
-            await _context.SaveChangesAsync();
-            if (!_context.IdentityDocumentType.Any())
-            {
-                _context.IdentityDocumentType.AddRange(
-                    new IdentityDocumentType
-                    {
-                        Code = "DNI",
-                        Description = "Documento Nacional de Identidad",
-                        Status = 1,
-                    },
-                    new IdentityDocumentType
-                    {
-                        Code = "RUC",
-                        Description = "Registro Unico de Contribuyente",
-                        Status = 1,
-                    },
-                    new IdentityDocumentType
-                    {
-                        Code = "CE",
-                        Description = "Carné de Extranjería",
-                        Status = 1,
-                    },
-                    new IdentityDocumentType
-                    {
-                        Code = "PASAPORTE",
-                        Description = "Pasaporte",
-                        Status = 1,
-                    },
-                    new IdentityDocumentType
-                    {
-                        Code = "OTROS",
-                        Description = "Otros",
-                        Status = 1,
-                    }
-                );
-
-                await _context.SaveChangesAsync();
-            }
+            await SeedEntityFromCsv<Tariff, TariffMap>("Tariffs.csv", _context.Tariff, _context);
         }
     }
 }
