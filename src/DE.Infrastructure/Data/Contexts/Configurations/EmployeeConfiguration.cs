@@ -11,6 +11,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.ToTable("Employees");
 
         builder.HasKey(e => e.Id);
+        builder.Property(e => e.Code).IsRequired();
 
         builder.Property(e => e.DocumentNumber).IsRequired().HasMaxLength(20);
         builder.Property(e => e.LastName).IsRequired().HasMaxLength(100);
