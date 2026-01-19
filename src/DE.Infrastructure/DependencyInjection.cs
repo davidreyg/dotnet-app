@@ -1,10 +1,12 @@
 ﻿using DE.Application.Interfaces;
 using DE.Application.Interfaces.Repositories;
 using DE.Infrastructure.Data.Contexts;
+using DE.Infrastructure.Data.SieveConfigurations;
 using DE.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sieve.Services;
 
 namespace DE.Infrastructure;
 
@@ -24,6 +26,11 @@ public static class DependencyInjection
         );
 
         services.AddScoped<ApplicationDbContextInitializer>();
+        // SieveProcessor
+        services.AddScoped<ISieveCustomSortMethods, SieveCustomSortMethods>();
+        services.AddScoped<ISieveCustomFilterMethods, SieveCustomFilterMethods>();
+        services.AddScoped<ISieveProcessor, ApplicationSieveProcessor>();
+
         services.AddRepositories();
         return services;
     }
