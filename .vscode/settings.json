@@ -14,5 +14,9 @@
   "csharp.format.enable": false,
   "[csharp]": {
     "editor.defaultFormatter": "csharpier.csharpier-vscode"
-  }
+  },
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules/*/**",
+    "**/*.csv"
+  ]
 }

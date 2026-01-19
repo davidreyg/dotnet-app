@@ -172,6 +172,11 @@ namespace DE.Infrastructure.Data.Contexts
                 _context
             );
             await SeedEntityFromCsv<Tariff, TariffMap>("Tariffs.csv", _context.Tariff, _context);
+            await SeedEntityFromCsv<Employee, EmployeeMap>(
+                "Employees.csv",
+                _context.Employee,
+                _context
+            );
         }
     }
 }
