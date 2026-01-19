@@ -5,7 +5,7 @@ using DE.Infrastructure.Data.Contexts;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
-var cors = "Cors";
+var cors = "AllowAll";
 
 builder.Services.AddControllers();
 
@@ -42,7 +42,7 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-app.UseCors("AllowAll");
+app.UseCors(cors);
 
 // Configure the HTTP request pipeline
 app.UseOpenApiDocumentation();
