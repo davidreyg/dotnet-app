@@ -7,13 +7,13 @@ public class Patient
     public int DocumentTypeId { get; set; } // Id_Tipo_Documento
     public string DocumentNumber { get; set; } = default!; // Numero_Documento
     public string MedicalRecordNumber { get; set; } = default!; // Historia_Clinica
-    public string FamilyFolderNumber { get; set; } = default!; // Ficha_Familiar
+    public string? FamilyFolderNumber { get; set; } = default!; // Ficha_Familiar
 
     // Personal Information
     public string FirstName { get; set; } = default!; // Nombres_Paciente
     public string LastName { get; set; } = default!; // Apellido_Paterno_Paciente
     public string MotherLastName { get; set; } = default!; // Apellido_Materno_Paciente
-    public DateTime BirthDate { get; set; } // Fecha_Nacimiento
+    public DateTime? BirthDate { get; set; } // Fecha_Nacimiento
     public string Gender { get; set; } = default!; // Genero (M/F)
     public int EthnicityCode { get; set; } // Id_Etnia
 
@@ -28,6 +28,6 @@ public class Patient
     // System & Audit
     public string CountryCode { get; set; } = default!; // Id_Pais
     public int EstablishmentCode { get; set; } // Id_Establecimiento
-    public DateTime HireDate { get; set; } // Fecha_Alta
+    public DateTime? HireDate { get; set; } // Fecha_Alta
     public DateTime? UpdatedAt { get; set; } // Fecha_Modificacion
 }

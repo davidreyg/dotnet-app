@@ -73,8 +73,16 @@ namespace DE.Infrastructure.Data.Contexts
                     return;
 
                 using var reader = new StreamReader(path);
-                using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    // MissingFieldFound = null,
+                    BadDataFound = null,
+                    // TrimOptions = TrimOptions.Trim,
+                    // HeaderValidated = null,
+                };
+
+                using var csv = new CsvReader(reader, config);
                 csv.Context.RegisterClassMap<TMap>();
 
                 var records = csv.GetRecords<TEntity>();
@@ -175,6 +183,11 @@ namespace DE.Infrastructure.Data.Contexts
             await SeedEntityFromCsv<Employee, EmployeeMap>(
                 "Employees.csv",
                 _context.Employee,
+                _context
+            );
+            await SeedEntityFromCsv<Patient, PatientMap>(
+                "Patients.csv",
+                _context.Patient,
                 _context
             );
         }
