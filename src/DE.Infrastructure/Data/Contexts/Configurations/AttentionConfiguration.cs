@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DE.Infrastructure.Data.Contexts.Configurations;
 
-public class HisAttentionConfiguration : IEntityTypeConfiguration<HisAttention>
+public class AttentionConfiguration : IEntityTypeConfiguration<Attention>
 {
-    public void Configure(EntityTypeBuilder<HisAttention> builder)
+    public void Configure(EntityTypeBuilder<Attention> builder)
     {
         // Table Mapping
-        builder.ToTable("HisAttentions");
+        builder.ToTable("Attentions");
 
         // Primary Key
         builder.HasKey(e => e.AppointmentId);

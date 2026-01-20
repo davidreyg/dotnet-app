@@ -1,6 +1,6 @@
 namespace DE.Domain.Entities;
 
-public class HisAttention
+public class Attention
 {
     public long AppointmentId { get; set; }
     public int Year { get; set; }
