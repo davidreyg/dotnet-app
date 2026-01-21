@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DE.Infrastructure.Migrations
 {
     [DbContext(typeof(DbContextApp))]
-    [Migration("20260120195125_Init")]
+    [Migration("20260120204625_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -27,8 +27,11 @@ namespace DE.Infrastructure.Migrations
 
             modelBuilder.Entity("DE.Domain.Entities.Attention", b =>
                 {
-                    b.Property<long>("AppointmentId")
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<decimal?>("AbdominalCircumference")
                         .HasPrecision(5, 2)
@@ -39,32 +42,28 @@ namespace DE.Infrastructure.Migrations
 
                     b.Property<string>("AgeType")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nchar(1)")
-                        .IsFixedLength();
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Alert")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("AppointmentId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("AttendanceDate")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Batch")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CorrelativeId")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("CountryCode")
+                    b.Property<int>("CorrelativeId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CountryCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -74,25 +73,24 @@ namespace DE.Infrastructure.Migrations
 
                     b.Property<string>("DiagnosisType")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nchar(1)")
-                        .IsFixedLength();
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DoseId")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<int>("EducationalInstitutionCode")
+                    b.Property<int?>("DoseId")
                         .HasColumnType("int");
+
+                    b.Property<string>("EducationalInstitutionCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmployeeCode")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EstablishmentCode")
                         .HasColumnType("int");
+
+                    b.Property<string>("EstablishmentConditionCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FinancierCode")
                         .HasColumnType("int");
@@ -107,10 +105,8 @@ namespace DE.Infrastructure.Migrations
                         .HasPrecision(5, 2)
                         .HasColumnType("decimal(5,2)");
 
-                    b.Property<string>("HealthServiceUnitCode")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("HealthServiceUnitCode")
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("Height")
                         .HasPrecision(5, 2)
@@ -122,18 +118,13 @@ namespace DE.Infrastructure.Migrations
 
                     b.Property<string>("ItemCode")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LabCorrelativeId")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("LabCorrelativeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("LabValue")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastMenstrualPeriod")
                         .HasColumnType("datetime2");
@@ -147,15 +138,15 @@ namespace DE.Infrastructure.Migrations
                     b.Property<int>("NumReg")
                         .HasColumnType("int");
 
-                    b.Property<string>("OriginApplicationId")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("OriginApplicationCode")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OtherConditionCode")
+                        .HasColumnType("int");
 
                     b.Property<string>("PatientCode")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PatientCurrentDay")
                         .HasColumnType("int");
@@ -171,24 +162,23 @@ namespace DE.Infrastructure.Migrations
                         .HasColumnType("decimal(5,2)");
 
                     b.Property<string>("PregnancyCondition")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RegistrarId")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("RegistrarCode")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Renipress")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                    b.Property<int>("Renipress")
+                        .HasColumnType("int");
 
                     b.Property<string>("RiskGroupDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServiceConditionCode")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SettlementCode")
+                        .HasColumnType("int");
 
                     b.Property<string>("ShiftId")
                         .IsRequired()
@@ -204,7 +194,7 @@ namespace DE.Infrastructure.Migrations
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
-                    b.HasKey("AppointmentId");
+                    b.HasKey("Id");
 
                     b.ToTable("Attentions", (string)null);
                 });

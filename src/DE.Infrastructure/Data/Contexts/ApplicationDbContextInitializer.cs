@@ -190,6 +190,11 @@ namespace DE.Infrastructure.Data.Contexts
                 _context.Patient,
                 _context
             );
+            await SeedEntityFromCsv<Attention, AttentionMap>(
+                "Attentions.csv",
+                _context.Attention,
+                _context
+            );
         }
     }
 }
