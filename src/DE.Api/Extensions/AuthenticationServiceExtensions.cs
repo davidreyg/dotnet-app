@@ -46,6 +46,7 @@ public static class AuthenticationServiceExtensions
                         oAuthConfiguration.ValidIssuer,
                         "http://auth.daregu.local/application/o/dotnet-backend/",
                     ],
+                    ValidAudiences = [oAuthConfiguration.Audience],
                     ClockSkew = TimeSpan.Zero,
                 };
 
