@@ -40,7 +40,7 @@ public static class AuthenticationServiceExtensions
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
+                    ValidateIssuerSigningKey = false,
                     ValidIssuers =
                     [
                         oAuthConfiguration.ValidIssuer,
