@@ -33,6 +33,7 @@ public static class AuthenticationServiceExtensions
                 options.Authority = oAuthConfiguration.Authority;
                 options.Audience = oAuthConfiguration.Audience;
                 options.RequireHttpsMetadata = oAuthConfiguration.RequireHttpsMetadata;
+                options.MetadataAddress = oAuthConfiguration.MetadataAddress;
 
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
