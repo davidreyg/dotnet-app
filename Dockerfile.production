@@ -1,0 +1,51 @@
+# Stage 1: Base
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
+
+# Stage 2: Build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+
+# Copiar archivos de proyecto en orden de dependencias
+COPY ["src/DE.Domain/DE.Domain.csproj", "src/DE.Domain/"]
+COPY ["src/DE.Application/DE.Application.csproj", "src/DE.Application/"]
+COPY ["src/DE.Infrastructure/DE.Infrastructure.csproj", "src/DE.Infrastructure/"]
+COPY ["src/DE.Api/DE.Api.csproj", "src/DE.Api/"]
+
+# Restaurar dependencias
+RUN dotnet restore "src/DE.Api/DE.Api.csproj"
+
+# Copiar todo el código fuente
+COPY . .
+
+# Build desde la raíz del proyecto
+WORKDIR /src
+RUN dotnet build "src/DE.Api/DE.Api.csproj" \
+    -c $BUILD_CONFIGURATION \
+    -o /app/build
+
+# Stage 3: Publish
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+RUN dotnet publish "src/DE.Api/DE.Api.csproj" \
+    -c $BUILD_CONFIGURATION \
+    -o /app/publish \
+    /p:UseAppHost=false
+
+# Stage 4: Final
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+# Crear usuario no-root para seguridad
+RUN addgroup --system --gid 1000 appuser && \
+    adduser --system --uid 1000 --gid 1000 appuser && \
+    chown -R appuser:appuser /app
+
+# USER appuser
+
+ENTRYPOINT ["dotnet", "DE.Api.dll"]
