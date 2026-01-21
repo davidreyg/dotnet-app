@@ -10,3 +10,9 @@ services:
     env_file:
       - .env
     restart: always
+    labels:
+      - traefik.http.routers.dashboard-backend-web.rule=Host(`api-dashboard.daregu.local`)
+      - traefik.http.routers.dashboard-backend-web.entrypoints=web
+      - traefik.http.services.dashboard-backend-web.loadbalancer.server.port=8090
+      - traefik.http.routers.dashboard-backend-web.service=dashboard-backend-web
+      - traefik.enable=true
