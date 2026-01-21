@@ -16,3 +16,8 @@ services:
       - traefik.http.services.dashboard-backend-web.loadbalancer.server.port=8090
       - traefik.http.routers.dashboard-backend-web.service=dashboard-backend-web
       - traefik.enable=true
+    networks:
+      - dokploy-network
+networks:
+  dokploy-network:
+    external: true
