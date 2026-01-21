@@ -2,6 +2,7 @@ using DE.Api.Extensions;
 using DE.Application;
 using DE.Infrastructure;
 using DE.Infrastructure.Data.Contexts;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,12 @@ builder.Services.AddControllers();
 // This will load secrets and make available in builder.Configuration
 builder.AddInfisicalConfiguration();
 builder.AddOpenApiDocumentation();
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
 
 // Add Infrastructure (Authentication)
 builder.Services.AddAuthInfrastructure(builder.Configuration);
@@ -43,6 +50,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 app.UseCors(cors);
+app.UseForwardedHeaders();
 
 // Configure the HTTP request pipeline
 app.UseOpenApiDocumentation();
