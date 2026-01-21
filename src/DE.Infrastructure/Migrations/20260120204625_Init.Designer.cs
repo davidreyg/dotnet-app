@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DE.Infrastructure.Migrations
 {
     [DbContext(typeof(DbContextApp))]
-    [Migration("20260120144751_PatientFamilyFolderNumber")]
-    partial class PatientFamilyFolderNumber
+    [Migration("20260120204625_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,180 @@ namespace DE.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DE.Domain.Entities.Attention", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal?>("AbdominalCircumference")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<int>("AgeReg")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AgeType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Alert")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("AppointmentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("AttendanceDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Batch")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CorrelativeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CountryCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Day")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DiagnosisType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DoseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EducationalInstitutionCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmployeeCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EstablishmentCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EstablishmentConditionCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FinancierCode")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("HbRequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("HbResultDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("HeadCircumference")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<int>("HealthServiceUnitCode")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Height")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<decimal?>("Hemoglobin")
+                        .HasPrecision(4, 2)
+                        .HasColumnType("decimal(4,2)");
+
+                    b.Property<string>("ItemCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LabCorrelativeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LabValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastMenstrualPeriod")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumPag")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumReg")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OriginApplicationCode")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OtherConditionCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PatientCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PatientCurrentDay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientCurrentMonth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientCurrentYear")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("PrePregnancyWeight")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<string>("PregnancyCondition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RegistrarCode")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Renipress")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RiskGroupDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServiceConditionCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SettlementCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShiftId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("Weight")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Attentions", (string)null);
+                });
 
             modelBuilder.Entity("DE.Domain.Entities.ContractType", b =>
                 {
@@ -331,190 +505,6 @@ namespace DE.Infrastructure.Migrations
                         {
                             t.HasCheckConstraint("CK_HealthServiceUnit_Code_Positive", "[Code] > 0");
                         });
-                });
-
-            modelBuilder.Entity("DE.Domain.Entities.HisAttention", b =>
-                {
-                    b.Property<long>("AppointmentId")
-                        .HasColumnType("bigint");
-
-                    b.Property<decimal?>("AbdominalCircumference")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<int>("AgeReg")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AgeType")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nchar(1)")
-                        .IsFixedLength();
-
-                    b.Property<string>("Alert")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("AttendanceDate")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Batch")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("CorrelativeId")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("CountryCode")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Day")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DiagnosisType")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nchar(1)")
-                        .IsFixedLength();
-
-                    b.Property<string>("DoseId")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<int>("EducationalInstitutionCode")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmployeeCode")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("EstablishmentCode")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FinancierCode")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("HbRequestDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("HbResultDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("HeadCircumference")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<string>("HealthServiceUnitCode")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<decimal?>("Height")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<decimal?>("Hemoglobin")
-                        .HasPrecision(4, 2)
-                        .HasColumnType("decimal(4,2)");
-
-                    b.Property<string>("ItemCode")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("LabCorrelativeId")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("LabValue")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime?>("LastMenstrualPeriod")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumPag")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumReg")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OriginApplicationId")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("PatientCode")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("PatientCurrentDay")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatientCurrentMonth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatientCurrentYear")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("PrePregnancyWeight")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<string>("PregnancyCondition")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("RegistrarId")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Renipress")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("RiskGroupDescription")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("ShiftId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("Weight")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("AppointmentId");
-
-                    b.ToTable("HisAttentions", (string)null);
                 });
 
             modelBuilder.Entity("DE.Domain.Entities.IdentityDocumentType", b =>
