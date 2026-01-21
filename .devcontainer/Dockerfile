@@ -7,7 +7,7 @@ RUN bash ./installSQLtools.sh \
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-     && apt-get -y install --no-install-recommends gnupg2=2.2.40-1.1+deb12u1 \
+     && apt-get -y install --no-install-recommends gnupg2 \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/*
 
