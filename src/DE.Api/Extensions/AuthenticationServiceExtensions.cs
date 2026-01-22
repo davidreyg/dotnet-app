@@ -34,7 +34,11 @@ public static class AuthenticationServiceExtensions
                 options.Audience = oAuthConfiguration.Audience;
                 options.RequireHttpsMetadata = oAuthConfiguration.RequireHttpsMetadata;
                 options.MetadataAddress = oAuthConfiguration.MetadataAddress;
-
+                options.BackchannelHttpHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+                        true,
+                };
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
