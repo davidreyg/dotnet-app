@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using DE.Api.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -41,6 +42,7 @@ public static class AuthenticationServiceExtensions
                 };
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
+                    SignatureValidator = (token, parameters) => new JwtSecurityToken(token),
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateLifetime = true,
