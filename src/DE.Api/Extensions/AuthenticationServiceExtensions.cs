@@ -26,14 +26,14 @@ public static class AuthenticationServiceExtensions
         var oAuthConfiguration =
             configuration.GetSection(OAuthConfiguration.SectionName).Get<OAuthConfiguration>()
             ?? throw new InvalidOperationException("Authentication settings are not configured");
-
+        Console.WriteLine(oAuthConfiguration);
         services
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
                 options.Authority = oAuthConfiguration.Authority;
                 options.Audience = oAuthConfiguration.Audience;
-                options.RequireHttpsMetadata = oAuthConfiguration.RequireHttpsMetadata;
+                options.RequireHttpsMetadata = false;
                 options.MetadataAddress = oAuthConfiguration.MetadataAddress;
                 options.BackchannelHttpHandler = new HttpClientHandler
                 {
@@ -42,7 +42,6 @@ public static class AuthenticationServiceExtensions
                 };
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    SignatureValidator = (token, parameters) => new JwtSecurityToken(token),
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateLifetime = true,
