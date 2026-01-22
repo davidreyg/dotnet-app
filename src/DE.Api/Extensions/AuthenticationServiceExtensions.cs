@@ -54,6 +54,8 @@ public static class AuthenticationServiceExtensions
                 {
                     OnAuthenticationFailed = context =>
                     {
+                        // Pon un breakpoint aquí
+                        Console.WriteLine("Error de autenticación: " + context.Exception.Message);
                         if (context.Exception is SecurityTokenExpiredException)
                         {
                             context.Response.Headers.Append("Token-Expired", "true");
