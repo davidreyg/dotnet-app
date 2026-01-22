@@ -26,7 +26,7 @@ public static class AuthenticationServiceExtensions
         var oAuthConfiguration =
             configuration.GetSection(OAuthConfiguration.SectionName).Get<OAuthConfiguration>()
             ?? throw new InvalidOperationException("Authentication settings are not configured");
-        Console.WriteLine(oAuthConfiguration);
+
         services
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -40,6 +40,7 @@ public static class AuthenticationServiceExtensions
                     ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
                         true,
                 };
+                options.MapInboundClaims = false;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -59,6 +60,7 @@ public static class AuthenticationServiceExtensions
                 {
                     OnAuthenticationFailed = context =>
                     {
+                        Console.WriteLine(oAuthConfiguration);
                         // Pon un breakpoint aquí
                         Console.WriteLine("Error de autenticación: " + context.Exception.Message);
                         if (context.Exception is SecurityTokenExpiredException)
