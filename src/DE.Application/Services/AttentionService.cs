@@ -9,9 +9,10 @@ public class AttentionService(IUnitOfWork uow) : IAttentionService
 {
     private readonly IUnitOfWork _uow = uow;
 
-    public async Task<AttentionMetricsResponse> GetCountsAsync(SieveModel sieveModel)
+    public async Task<AttentionMetricsResponse> GetMetricsCountAsync(SieveModel sieveModel)
     {
-        var attentions = await _uow.AttentionRepository.GetCountAsync(sieveModel);
-        return new AttentionMetricsResponse(attentions, 0, 0, 0);
+        var attentions = await _uow.AttentionRepository.GetAllAttentionsCount(sieveModel);
+        var attended = await _uow.AttentionRepository.GetAttendedPatientsCount(sieveModel);
+        return new AttentionMetricsResponse(attentions, 0, 0, attended);
     }
 }
