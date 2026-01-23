@@ -12,7 +12,7 @@ public class AttentionController(IAttentionService attentionService) : Controlle
     private readonly IAttentionService _attentionService = attentionService;
 
     [Authorize]
-    [HttpGet()]
+    [HttpGet("metricas")]
     public async Task<IActionResult> GetAll([FromQuery] SieveModel model)
     {
         var response = await _attentionService.GetCountsAsync(model);
