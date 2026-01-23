@@ -5,5 +5,5 @@ namespace DE.Application.Interfaces.Services;
 
 public interface IAttentionService
 {
-    Task<AttentionMetricsResponse> GetCountsAsync(SieveModel sieveModel);
+    Task<AttentionMetricsResponse> GetMetricsCountAsync(SieveModel sieveModel);
 }

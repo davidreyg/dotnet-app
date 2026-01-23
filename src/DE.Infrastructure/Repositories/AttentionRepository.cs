@@ -17,10 +17,17 @@ public class AttentionRepository : GenericRepository<Attention>, IAttentionRepos
         _sieveProcessor = sieveProcessor;
     }
 
-    public async Task<int> GetCountAsync(SieveModel model)
+    public async Task<int> GetAllAttentionsCount(SieveModel model)
     {
         var query = _dbSet.AsNoTracking();
         query = _sieveProcessor.Apply(model, query, applyPagination: false);
         return await query.CountAsync();
+    }
+
+    public async Task<int> GetAttendedPatientsCount(SieveModel model)
+    {
+        var query = _dbSet.AsNoTracking();
+        query = _sieveProcessor.Apply(model, query, applyPagination: false);
+        return await query.Select(a => a.PatientCode).Distinct().CountAsync();
     }
 }

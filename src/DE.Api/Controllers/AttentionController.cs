@@ -15,7 +15,7 @@ public class AttentionController(IAttentionService attentionService) : Controlle
     [HttpGet("metricas")]
     public async Task<IActionResult> GetAll([FromQuery] SieveModel model)
     {
-        var response = await _attentionService.GetCountsAsync(model);
+        var response = await _attentionService.GetMetricsCountAsync(model);
         return Ok(response);
     }
 }
