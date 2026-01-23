@@ -20,6 +20,7 @@ public interface IUnitOfWork : IDisposable
     IEmployeeRepository EmployeeRepository { get; }
     ISisProcedureRepository SisProcedureRepository { get; }
     ITariffRepository TariffRepository { get; }
+    IAttentionRepository AttentionRepository { get; }
 
     Task<int> SaveChangesAsync();
     Task<IDbContextTransaction> BeginTransactionAsync();

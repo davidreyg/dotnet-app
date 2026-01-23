@@ -55,6 +55,7 @@ public static class DependencyInjection
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         services.AddScoped<ISisProcedureRepository, SisProcedureRepository>();
         services.AddScoped<ITariffRepository, TariffRepository>();
+        services.AddScoped<IAttentionRepository, AttentionRepository>();
 
         return services;
     }
